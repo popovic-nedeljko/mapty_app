@@ -572,3 +572,150 @@ a:visited {
 .hidden {
   display: none !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Large tablet / small laptop (≤ 1100px) ─────────────────────────────── */
+@media (max-width: 1100px) {
+  body {
+    padding: 1.5rem;
+  }
+
+  .sidebar {
+    flex-basis: 42rem;
+    padding: 2rem 3.5rem;
+  }
+}
+
+/* ── Tablet (≤ 900px) ───────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  body {
+    padding: 1rem;
+  }
+
+  .sidebar {
+    flex-basis: 34rem;
+    padding: 1.5rem 2rem;
+  }
+
+  .workout {
+    grid-template-columns: 1fr 1fr;
+    padding: 1.2rem 1.5rem;
+    gap: 0.6rem 1rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .form {
+    grid-template-columns: 1fr;
+    max-height: 38rem;
+    padding: 1.2rem 2rem;
+  }
+
+  .form__label {
+    flex: 0 0 40%;
+  }
+}
+
+/* ── Mobile (≤ 768px) ───────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  #map {
+    order: -1;
+    flex: 0 0 55vh;
+  }
+
+  .sidebar {
+    flex: 1;
+    padding: 1.2rem 1.5rem;
+  }
+
+  .logo {
+    height: 3.5rem;
+  }
+
+  .controls {
+    gap: 0.4rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .workout {
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem 1.2rem;
+    gap: 0.5rem 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .workout__title {
+    font-size: 1.5rem;
+  }
+
+  .form {
+    grid-template-columns: 1fr;
+    max-height: 40rem;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .form__label {
+    flex: 0 0 45%;
+    font-size: 1.4rem;
+  }
+
+  .copyright {
+    padding-top: 0.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* ── Small mobile (≤ 480px) ─────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  html {
+    font-size: 56.25%;
+  }
+
+  #map {
+    flex: 0 0 48vh;
+  }
+
+  .sidebar {
+    padding: 1rem 1.2rem;
+  }
+
+  .logo {
+    height: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .controls__btn,
+  .controls__select {
+    font-size: 1.1rem;
+    padding: 0.35rem 0.5rem;
+  }
+
+  .workout {
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .geo-error__row {
+    flex-direction: column;
+  }
+
+  .stats__totals {
+    gap: 0.4rem;
+  }
+
+  .stats__label {
+    font-size: 0.9rem;
+  }
+
+  .stats__value {
+    font-size: 1.2rem;
+  }
+}
