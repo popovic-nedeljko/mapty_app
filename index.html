@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" type="image/png" href="/icon.png" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="script.js"></script>
+
+    <title>mapty // Map your workouts</title>
+  </head>
+  <body>
+    <div class="sidebar">
+      <img src="logo.png" alt="Logo" class="logo" />
+
+      <!-- Controls toolbar -->
+      <div class="controls">
+        <div class="controls__row">
+          <select class="controls__select controls__select--filter" title="Filter by type">
+            <option value="all">All types</option>
+            <option value="running">Running only</option>
+            <option value="cycling">Cycling only</option>
+          </select>
+          <select class="controls__select controls__select--sort" title="Sort by">
+            <option value="date">Sort: Date</option>
+            <option value="distance">Sort: Distance</option>
+            <option value="duration">Sort: Duration</option>
+          </select>
+        </div>
+        <div class="controls__row">
+          <button class="controls__btn controls__btn--fit" title="Fit all workouts on map">🗺 Fit</button>
+          <button class="controls__btn controls__btn--route" title="Draw a route">✏️ Route</button>
+          <select class="controls__select controls__select--theme" title="Map theme">
+            <option value="hot">Standard</option>
+            <option value="satellite">Satellite</option>
+            <option value="dark">Dark</option>
+          </select>
+          <button class="controls__btn controls__btn--clear-all" title="Delete all workouts">🗑 Clear</button>
+        </div>
+      </div>
+
+      <!-- Geolocation denied — manual input -->
+      <div class="geo-error hidden">
+        <p class="geo-error__msg">📍 Location access denied. Enter coordinates manually:</p>
+        <div class="geo-error__row">
+          <input type="number" class="geo-error__input geo-error__input--lat" placeholder="Latitude" step="any" />
+          <input type="number" class="geo-error__input geo-error__input--lng" placeholder="Longitude" step="any" />
+          <button class="geo-error__btn">Go</button>
+        </div>
+      </div>
+
+      <!-- Main content: tabbed workouts / stats -->
+      <div class="main-content">
+        <div class="tabs">
+          <button class="tab tab--active" data-tab="workouts">Workouts</button>
+          <button class="tab" data-tab="stats">Stats</button>
+        </div>
+
+        <!-- Workouts panel -->
+        <div class="tab-panel tab-panel--workouts">
+          <ul class="workouts">
+            <form class="form hidden">
+              <div class="form__row">
+                <label class="form__label">Type</label>
+                <select class="form__input form__input--type">
+                  <option value="running">Running</option>
+                  <option value="cycling">Cycling</option>
+                </select>
+              </div>
+              <div class="form__row">
+                <label class="form__label">Distance</label>
+                <input class="form__input form__input--distance" placeholder="km" />
+              </div>
+              <div class="form__row">
+                <label class="form__label">Duration</label>
+                <input class="form__input form__input--duration" placeholder="min" />
+              </div>
+              <div class="form__row">
+                <label class="form__label">Cadence</label>
+                <input class="form__input form__input--cadence" placeholder="step/min" />
+              </div>
+              <div class="form__row form__row--hidden">
+                <label class="form__label">Elev Gain</label>
+                <input class="form__input form__input--elevation" placeholder="meters" />
+              </div>
+              <button class="form__btn">OK</button>
+              <p class="form__error hidden"></p>
+            </form>
+
+            <li class="empty-state hidden">
+              🏋️ Click on the map to add your first workout!
+            </li>
+          </ul>
+        </div>
+
+        <!-- Stats panel -->
+        <div class="tab-panel tab-panel--stats hidden">
+          <div class="stats">
+            <div class="stats__totals">
+              <div class="stats__item">
+                <span class="stats__label">Distance</span>
+                <span class="stats__value stats__value--distance">0 km</span>
+              </div>
+              <div class="stats__item">
+                <span class="stats__label">Duration</span>
+                <span class="stats__value stats__value--duration">0 min</span>
+              </div>
+              <div class="stats__item">
+                <span class="stats__label">Avg Pace</span>
+                <span class="stats__value stats__value--pace">—</span>
+              </div>
+            </div>
+            <div class="stats__chart-wrap">
+              <div class="stats__tabs">
+                <button class="stats__tab stats__tab--active" data-period="week">Week</button>
+                <button class="stats__tab" data-period="month">Month</button>
+              </div>
+              <div class="stats__chart-box">
+                <canvas class="stats__canvas"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="copyright">
+        &copy; Copyright by
+        <a class="twitter-link" target="_blank" href="https://twitter.com/jonasschmedtman"
+          >Jonas Schmedtmann</a
+        >. Use for learning or your portfolio.
+      </p>
+    </div>
+
+    <div id="map"></div>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "Mapty — Map your workouts",
+  "short_name": "Mapty",
+  "description": "Track running and cycling workouts on a map",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2d3439",
+  "theme_color": "#2d3439",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,574 @@
+:root {
+  --color-brand--1: #ffb545;
+  --color-brand--2: #00c46a;
+  --color-dark--1: #2d3439;
+  --color-dark--2: #42484d;
+  --color-light--1: #aaa;
+  --color-light--2: #ececec;
+  --color-light--3: rgb(214, 222, 224);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  color: var(--color-light--2);
+  font-weight: 400;
+  line-height: 1.6;
+  height: 100vh;
+  overscroll-behavior-y: none;
+  background-color: #fff;
+  padding: 2.5rem;
+  display: flex;
+}
+
+a:link,
+a:visited {
+  color: var(--color-brand--1);
+}
+
+/* ── Sidebar ────────────────────────────────────────────────────────────────── */
+
+.sidebar {
+  flex-basis: 50rem;
+  background-color: var(--color-dark--1);
+  padding: 2rem 5rem 2rem 5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.logo {
+  height: 4rem;
+  align-self: center;
+  margin-bottom: 1rem;
+}
+
+/* ── Controls toolbar ──────────────────────────────────────────────────────── */
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.controls__row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.controls__select {
+  flex: 1;
+  min-width: 0;
+  padding: 0.4rem 0.8rem;
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--color-dark--2);
+  color: var(--color-light--2);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.controls__select:hover {
+  background-color: #555;
+}
+
+.controls__btn {
+  flex: 1;
+  min-width: 0;
+  padding: 0.4rem 0.8rem;
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--color-dark--2);
+  color: var(--color-light--2);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.controls__btn:hover {
+  background-color: #555;
+}
+
+.controls__btn--active {
+  background-color: var(--color-brand--2);
+  color: #fff;
+}
+
+.controls__btn--clear-all:hover {
+  background-color: #c0392b;
+}
+
+/* ── Geolocation error fallback ────────────────────────────────────────────── */
+
+.geo-error {
+  background-color: var(--color-dark--2);
+  border-radius: 5px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid var(--color-brand--1);
+}
+
+.geo-error__msg {
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  color: var(--color-brand--1);
+}
+
+.geo-error__row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.geo-error__input {
+  flex: 1;
+  padding: 0.4rem 0.8rem;
+  font-family: inherit;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--color-light--3);
+}
+
+.geo-error__btn {
+  padding: 0.4rem 1.2rem;
+  font-family: inherit;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--color-brand--2);
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ── Main content (tabbed) ─────────────────────────────────────────────────── */
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── Tabs ───────────────────────────────────────────────────────────────────── */
+
+.tabs {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  margin-bottom: 0.8rem;
+}
+
+.tab {
+  flex: 1;
+  padding: 0.5rem;
+  font-family: inherit;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--color-dark--2);
+  color: var(--color-light--1);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.tab:hover {
+  background-color: #555;
+  color: var(--color-light--2);
+}
+
+.tab--active {
+  background-color: var(--color-brand--2);
+  color: #fff;
+}
+
+/* ── Tab panels ─────────────────────────────────────────────────────────────── */
+
+.tab-panel {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.tab-panel::-webkit-scrollbar {
+  width: 0;
+}
+
+.tab-panel--stats {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Workout list ───────────────────────────────────────────────────────────── */
+
+.workouts {
+  list-style: none;
+}
+
+/* ── Empty state ────────────────────────────────────────────────────────────── */
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+  font-size: 1.4rem;
+  color: var(--color-light--1);
+  text-align: center;
+  padding: 0 1rem;
+}
+
+/* ── Workout card ───────────────────────────────────────────────────────────── */
+
+.workout {
+  background-color: var(--color-dark--2);
+  border-radius: 5px;
+  padding: 1.5rem 2.25rem;
+  margin-bottom: 1.75rem;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0.75rem 1.5rem;
+  transition: transform 0.1s;
+}
+
+.workout:hover {
+  transform: translateX(2px);
+}
+
+.workout--active {
+  box-shadow: 0 0 0 2px var(--color-brand--2);
+  background-color: #52585d;
+}
+
+.workout--running {
+  border-left: 5px solid var(--color-brand--2);
+}
+
+.workout--cycling {
+  border-left: 5px solid var(--color-brand--1);
+}
+
+.workout__header {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.workout__title {
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+.workout__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.workout__weather {
+  font-size: 1.2rem;
+  color: var(--color-light--1);
+}
+
+.workout__btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  color: var(--color-light--1);
+  transition: color 0.2s, background-color 0.2s;
+  line-height: 1;
+}
+
+.workout__btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-light--2);
+}
+
+.workout__delete:hover {
+  color: #e74c3c;
+}
+
+.workout__details {
+  display: flex;
+  align-items: baseline;
+}
+
+.workout__icon {
+  font-size: 1.8rem;
+  margin-right: 0.2rem;
+  height: 0.28rem;
+}
+
+.workout__value {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.workout__unit {
+  font-size: 1.1rem;
+  color: var(--color-light--1);
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+/* ── Form ───────────────────────────────────────────────────────────────────── */
+
+.form {
+  background-color: var(--color-dark--2);
+  border-radius: 5px;
+  padding: 1.5rem 2.75rem;
+  margin-bottom: 1.75rem;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 2.5rem;
+  max-height: 20rem;
+  transition: max-height 0.4s ease, opacity 0.4s, padding-top 0.4s, padding-bottom 0.4s, margin-bottom 0.4s;
+}
+
+.form.hidden {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form__row {
+  display: flex;
+  align-items: center;
+}
+
+.form__row--hidden {
+  display: none;
+}
+
+.form__label {
+  flex: 0 0 50%;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.form__input {
+  width: 100%;
+  padding: 0.3rem 1.1rem;
+  font-family: inherit;
+  font-size: 1.4rem;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  background-color: var(--color-light--3);
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.form__input:focus {
+  outline: none;
+  background-color: #fff;
+}
+
+.form__input--invalid {
+  border-color: #e74c3c;
+  background-color: #fdecea;
+}
+
+.form__btn {
+  display: none;
+}
+
+.form__error {
+  grid-column: 1 / -1;
+  font-size: 1.3rem;
+  color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.1);
+  border-radius: 3px;
+  padding: 0.4rem 0.8rem;
+}
+
+/* ── Statistics ─────────────────────────────────────────────────────────────── */
+
+.stats {
+  background-color: var(--color-dark--2);
+  border-radius: 5px;
+  padding: 0.8rem 1.2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.stats__title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-light--1);
+  margin-bottom: 0.6rem;
+}
+
+.stats__totals {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.stats__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-dark--1);
+  border-radius: 4px;
+  padding: 0.6rem 0.4rem;
+}
+
+.stats__label {
+  font-size: 1rem;
+  color: var(--color-light--1);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.stats__value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-light--2);
+}
+
+.stats__chart-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-height: 0;
+}
+
+.stats__tabs {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.stats__tab {
+  padding: 0.3rem 1rem;
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--color-dark--1);
+  color: var(--color-light--1);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.stats__tab--active {
+  background-color: var(--color-brand--2);
+  color: #fff;
+}
+
+.stats__chart-box {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.stats__canvas {
+  display: block;
+}
+
+/* ── Copyright ───────────────────────────────────────────────────────────────── */
+
+.copyright {
+  margin-top: auto;
+  padding-top: 0.8rem;
+  font-size: 1.1rem;
+  text-align: center;
+  color: var(--color-light--1);
+  flex-shrink: 0;
+}
+
+.twitter-link:link,
+.twitter-link:visited {
+  color: var(--color-light--1);
+  transition: all 0.2s;
+}
+
+.twitter-link:hover,
+.twitter-link:active {
+  color: var(--color-light--2);
+}
+
+/* ── Map ────────────────────────────────────────────────────────────────────── */
+
+#map {
+  flex: 1;
+  height: 100%;
+  background-color: var(--color-light--1);
+}
+
+/* ── Leaflet marker highlight ───────────────────────────────────────────────── */
+
+.marker--active {
+  filter: drop-shadow(0 0 8px #00c46a) brightness(1.25);
+  transition: filter 0.2s;
+}
+
+/* ── Leaflet popups ─────────────────────────────────────────────────────────── */
+
+.leaflet-popup .leaflet-popup-content-wrapper {
+  background-color: var(--color-dark--1);
+  color: var(--color-light--2);
+  border-radius: 5px;
+  padding-right: 0.6rem;
+}
+
+.leaflet-popup .leaflet-popup-content {
+  font-size: 1.5rem;
+}
+
+.leaflet-popup .leaflet-popup-tip {
+  background-color: var(--color-dark--1);
+}
+
+.running-popup .leaflet-popup-content-wrapper {
+  border-left: 5px solid var(--color-brand--2);
+}
+
+.cycling-popup .leaflet-popup-content-wrapper {
+  border-left: 5px solid var(--color-brand--1);
+}
+
+/* ── Utilities ───────────────────────────────────────────────────────────────── */
+
+.hidden {
+  display: none !important;
+}
